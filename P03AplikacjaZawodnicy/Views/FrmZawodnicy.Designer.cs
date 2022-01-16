@@ -36,6 +36,7 @@ namespace P03AplikacjaZawodnicy.Views
             this.btnUsun = new System.Windows.Forms.Button();
             this.btnKolumny = new System.Windows.Forms.Button();
             this.btnPDF = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // lbDane
@@ -106,11 +107,20 @@ namespace P03AplikacjaZawodnicy.Views
             this.btnPDF.UseVisualStyleBackColor = true;
             this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(361, 45);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(277, 255);
+            this.webBrowser1.TabIndex = 7;
+            // 
             // FrmZawodnicy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 323);
+            this.ClientSize = new System.Drawing.Size(659, 323);
+            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnPDF);
             this.Controls.Add(this.btnKolumny);
             this.Controls.Add(this.btnUsun);
@@ -133,6 +143,7 @@ namespace P03AplikacjaZawodnicy.Views
         private System.Windows.Forms.Button btnUsun;
         private System.Windows.Forms.Button btnKolumny;
         private System.Windows.Forms.Button btnPDF;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
 

@@ -25,8 +25,14 @@ namespace P03AplikacjaZawodnicy.Views
         {
             ZawodnicyRepository zr = new ZawodnicyRepository();
 
+
             if (fk != null)
-                zr.Wczytaj(fk.ChlbKolumny.CheckedItems);
+            {
+                string[] kolumny = new string[fk.ChlbKolumny.CheckedItems.Count];
+                for (int i = 0; i < fk.ChlbKolumny.CheckedItems.Count; i++)
+                    kolumny[i] = fk.ChlbKolumny.CheckedItems[i].ToString();
+                zr.Wczytaj(kolumny);
+            }
             else
                 zr.Wczytaj();
 
@@ -69,7 +75,10 @@ namespace P03AplikacjaZawodnicy.Views
         private void btnPDF_Click(object sender, EventArgs e)
         {
             PDFManager pm = new PDFManager();
-            pm.StworzPDF((ZawodnikVM[])lbDane.DataSource);
+            string nazwaPliku=  pm.StworzPDF((ZawodnikVM[])lbDane.DataSource);
+
+            string sciezkaDoFolderu = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            webBrowser1.Navigate($@"{sciezkaDoFolderu}\{nazwaPliku}");
         }
     }
 }

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace P03AplikacjaZawodnicy.Tools
 {
-    class PDFManager
+     public class PDFManager
     {
-        public void StworzPDF(ZawodnikVM[] zawodnicy)
+        public string StworzPDF(ZawodnikVM[] zawodnicy)
         {
             // Create a new PDF document
             PdfDocument document = new PdfDocument();
@@ -34,10 +34,12 @@ namespace P03AplikacjaZawodnicy.Tools
             
 
             // Save the document...
-            const string filename = "HelloWorld.pdf";
+            string filename = DateTime.Now.ToString("ddMMyyyyHHmm")+ "HelloWorld.pdf";
             document.Save(filename);
             // ...and start a viewer.
-            Process.Start(filename);
+            //  Process.Start(filename);
+
+            return filename;
         }
     }
 }

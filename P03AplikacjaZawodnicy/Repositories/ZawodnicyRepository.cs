@@ -20,7 +20,7 @@ namespace P03AplikacjaZawodnicy.Repositories
             Wczytaj(null);
         }
         
-        public void Wczytaj(CheckedItemCollection soc)
+        public void Wczytaj(string[] soc)
         {
             ModelBazyDanychDataContext db = new ModelBazyDanychDataContext();
             Zawodnicy = db.Zawodnik.Select(x=>new ZawodnikVM(x.imie,x.nazwisko,soc)

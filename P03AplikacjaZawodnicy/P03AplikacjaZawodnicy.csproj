@@ -58,8 +58,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelBazyDanych.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PDFManager.cs" />
-    <Compile Include="ViewModels\ZawodnikVM.cs" />
     <Compile Include="Views\FrmKolumny.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +122,19 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tools\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\P03AplikacjaZawodnicy.ViewModels\P03AplikacjaZawodnicy.ViewModels.csproj">
+      <Project>{62c5dbc2-32fe-4a52-a7b7-c3d74d99a2fc}</Project>
+      <Name>P03AplikacjaZawodnicy.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\P04BibliotekaPDF\P04BibliotekaPDF.csproj">
+      <Project>{941698cc-0b4b-48b1-8bc5-3ce3cfaa60db}</Project>
+      <Name>P04BibliotekaPDF</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

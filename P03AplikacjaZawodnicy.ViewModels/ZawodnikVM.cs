@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Windows.Forms.CheckedListBox;
+ 
 
 namespace P03AplikacjaZawodnicy.ViewModels
 {
@@ -18,7 +18,7 @@ namespace P03AplikacjaZawodnicy.ViewModels
         public int Wzrost;
         public int Waga;
 
-        private CheckedItemCollection soc;
+        private string[] soc;
 
         public string ImieNazwisko { get { return Imie + " " + Nazwisko; } }
 
@@ -76,7 +76,7 @@ namespace P03AplikacjaZawodnicy.ViewModels
             Imie = imie;
             Nazwisko = nazwisko;
         }
-        public ZawodnikVM(string imie, string nazwisko , CheckedItemCollection soc): this(imie,nazwisko)
+        public ZawodnikVM(string imie, string nazwisko , string[] soc): this(imie,nazwisko)
         {
             this.soc = soc;
         }
