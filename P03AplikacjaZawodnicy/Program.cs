@@ -7,6 +7,8 @@ using System.Windows.Forms;
 
 namespace P03AplikacjaZawodnicy
 {
+
+    //https://github.com/tomasz-trener/06WDzien8
     static class Program
     {
         /// <summary>

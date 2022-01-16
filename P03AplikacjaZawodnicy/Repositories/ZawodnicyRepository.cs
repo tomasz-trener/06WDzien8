@@ -1,5 +1,5 @@
-﻿using P03AplikacjaZawodnicy.ViewModels;
-using P03AplikacjaZawodnicy.Tools;
+﻿using P03AplikacjaZawodnicy.Domains;
+using P03AplikacjaZawodnicy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +11,7 @@ namespace P03AplikacjaZawodnicy.Repositories
 {
     public class ZawodnicyRepository
     {
-        string connString = "Data Source=.;Initial Catalog=A_Zawodnicy;User ID=sa;Password=alx";
-
+       
         public ZawodnikVM[] Zawodnicy;
 
         
@@ -23,76 +22,59 @@ namespace P03AplikacjaZawodnicy.Repositories
         
         public void Wczytaj(CheckedItemCollection soc)
         {
-          
-            PolaczenieZBaza pzb = new PolaczenieZBaza(connString);
-
-            object[][] wynik= pzb.WykonajZapytanieSQL("select * from zawodnicy");
-
-            Zawodnicy = new ZawodnikVM[wynik.Length];
-
-            for (int i = 0; i < wynik.Length; i++)
+            ModelBazyDanychDataContext db = new ModelBazyDanychDataContext();
+            Zawodnicy = db.Zawodnik.Select(x=>new ZawodnikVM(x.imie,x.nazwisko,soc)
             {
-                ZawodnikVM z = new ZawodnikVM((string)wynik[i][2], (string)wynik[i][3], soc);
-                z.Id_zawodnika = (int)wynik[i][0];
-
-
-                if(!(wynik[i][1] is DBNull))
-                    z.Id_trenera = (int)wynik[i][1];
-
-                //try
-                //{
-                //    z.Id_trenera = (int)wynik[i][1];
-                //}
-                //catch (Exception)
-                //{
-
-                //}
-                // z.Id_trenera = (int?)wynik[i][1]; (NULL w bazie danych<> NULL w C#)
-
-                z.Kraj = (string)wynik[i][4];
-                z.DataUrodzenia = (DateTime)wynik[i][5];
-                z.Wzrost = (int)wynik[i][6];
-                z.Waga = (int)wynik[i][7];
-                Zawodnicy[i] = z;
-            }
+                Id_zawodnika = x.id_zawodnika,
+                Kraj =x.kraj,
+                DataUrodzenia =(DateTime)x.data_ur,
+                Waga= (int)x.waga,
+                Wzrost = (int)x.wzrost
+            })
+                .ToArray();
+           
+             
         }
 
         public void Dodaj(ZawodnikVM z)
         {
-            PolaczenieZBaza pzb = new PolaczenieZBaza(connString);
+            Zawodnik nowy = new Zawodnik()
+            {
+                imie = z.Imie,
+                nazwisko = z.Nazwisko,
+                kraj = z.Kraj,
+                data_ur = z.DataUrodzenia,
+                wzrost = z.Wzrost,
+                waga = z.Waga
+            };
 
-            string sql = 
-                string.Format("insert into zawodnicy values(null, '{0}', '{1}', '{2}', '{3}', {4}, {5});",
-                z.Imie,z.Nazwisko,z.Kraj,z.DataUrodzenia.ToString("yyyyMMdd"),z.Wzrost,z.Waga);
-         
-            pzb.WykonajZapytanieSQL(sql);
+            ModelBazyDanychDataContext db = new ModelBazyDanychDataContext();
+            db.Zawodnik.InsertOnSubmit(nowy);
+            db.SubmitChanges();
         }
 
         public void Edytuj(ZawodnikVM z)
         {
-            PolaczenieZBaza pzb = new PolaczenieZBaza(connString);
+            ModelBazyDanychDataContext db = new ModelBazyDanychDataContext();
+            var doEdycji = db.Zawodnik.FirstOrDefault(x => x.id_zawodnika == z.Id_zawodnika);
 
-            string sql = string.Format(
-                "update zawodnicy set " +
-                   " imie = '{0}', " +
-                   " nazwisko = '{1}', " +
-                   " kraj = '{2}', " +
-                   " data_ur = '{3}', " +
-                   " wzrost = {4}, " +
-                   " waga = {5}" +
-                   " where id_zawodnika = {6}",
-                z.Imie,z.Nazwisko,z.Kraj,z.DataUrodzenia.ToString("yyyyMMdd"), z.Wzrost,z.Waga,z.Id_zawodnika);
-          
-            pzb.WykonajZapytanieSQL(sql);
+            doEdycji.imie = z.Imie;
+            doEdycji.nazwisko = z.Nazwisko;
+            doEdycji.kraj = z.Kraj;
+            doEdycji.data_ur = z.DataUrodzenia;
+            doEdycji.waga = z.Waga;
+            doEdycji.wzrost = z.Wzrost;
+
+            db.SubmitChanges();
         }
 
         public void Usun(int id)
         {
-            PolaczenieZBaza pzb = new PolaczenieZBaza(connString);
-            string sql = string.Format("delete zawodnicy where id_zawodnika={0}", id);
+            ModelBazyDanychDataContext db = new ModelBazyDanychDataContext();
+            var z =db.Zawodnik.FirstOrDefault(x => x.id_zawodnika == id);
 
-            pzb.WykonajZapytanieSQL(sql);
-
+            db.Zawodnik.DeleteOnSubmit(z);
+            db.SubmitChanges();
         }
     }
 }
