@@ -35,6 +35,7 @@ namespace P03AplikacjaZawodnicy.Views
             this.btnEdytuj = new System.Windows.Forms.Button();
             this.btnUsun = new System.Windows.Forms.Button();
             this.btnKolumny = new System.Windows.Forms.Button();
+            this.btnPDF = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbDane
@@ -95,11 +96,22 @@ namespace P03AplikacjaZawodnicy.Views
             this.btnKolumny.UseVisualStyleBackColor = true;
             this.btnKolumny.Click += new System.EventHandler(this.btnKolumny_Click);
             // 
+            // btnPDF
+            // 
+            this.btnPDF.Location = new System.Drawing.Point(280, 162);
+            this.btnPDF.Name = "btnPDF";
+            this.btnPDF.Size = new System.Drawing.Size(75, 23);
+            this.btnPDF.TabIndex = 6;
+            this.btnPDF.Text = "PDF";
+            this.btnPDF.UseVisualStyleBackColor = true;
+            this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
+            // 
             // FrmZawodnicy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(371, 323);
+            this.Controls.Add(this.btnPDF);
             this.Controls.Add(this.btnKolumny);
             this.Controls.Add(this.btnUsun);
             this.Controls.Add(this.btnEdytuj);
@@ -120,6 +132,7 @@ namespace P03AplikacjaZawodnicy.Views
         private System.Windows.Forms.Button btnEdytuj;
         private System.Windows.Forms.Button btnUsun;
         private System.Windows.Forms.Button btnKolumny;
+        private System.Windows.Forms.Button btnPDF;
     }
 }
 

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using P03AplikacjaZawodnicy.Tools;
 
 namespace P03AplikacjaZawodnicy.Views
 {
@@ -41,7 +42,7 @@ namespace P03AplikacjaZawodnicy.Views
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            FrmSzczegoly fs = new FrmSzczegoly(this,TrybOkienka.Stworzenie);
+            FrmSzczegoly fs = new FrmSzczegoly(this, TrybOkienka.Stworzenie);
             fs.Show();
         }
 
@@ -63,6 +64,12 @@ namespace P03AplikacjaZawodnicy.Views
         {
             fk = new FrmKolumny(this);
             fk.Show();
+        }
+
+        private void btnPDF_Click(object sender, EventArgs e)
+        {
+            PDFManager pm = new PDFManager();
+            pm.StworzPDF((ZawodnikVM[])lbDane.DataSource);
         }
     }
 }
